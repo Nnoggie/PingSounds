@@ -1,0 +1,10 @@
+## Interface: 100107
+## Title: UIManager
+## Author: Nnoggie
+## Version: 1.0.0
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: PingSoundsDB
+
+libs\loadLibs.xml
+load.xml
