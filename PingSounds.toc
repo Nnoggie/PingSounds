@@ -7,4 +7,5 @@
 ## SavedVariables: PingSoundsDB
 
 libs\loadLibs.xml
+utils\loadUtils.xml
 load.xml
