@@ -1,2 +1,3 @@
 libs/*
+!libs/loadLibs.xml
 .vscode/*
