@@ -5,6 +5,9 @@
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariables: PingSoundsDB
+## X-Curse-Project-ID: 911000
+## X-Wago-ID: aNDm9g6o
+## IconTexture: Interface\AddOns\PingSounds\logo
 
 libs\loadLibs.xml
 utils\loadUtils.xml
