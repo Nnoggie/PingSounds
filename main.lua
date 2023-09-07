@@ -18,6 +18,7 @@ end
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("CVAR_UPDATE")
+f:RegisterEvent("PLAYER_LOGOUT")
 
 f:SetScript("OnEvent", function(self, event, ...)
   if event == "PLAYER_ENTERING_WORLD" then
@@ -32,6 +33,9 @@ f:SetScript("OnEvent", function(self, event, ...)
       addon:AddonPrint(
         "To Restore normal sound effect behavior, use /pingsounds disable and relog or disable the AddOn completely")
     end
+  elseif event == "PLAYER_LOGOUT" then
+    if addon.db.enabled then
+      SetCVar("Sound_EnableSFX", 0)
     end
   end
 end)
