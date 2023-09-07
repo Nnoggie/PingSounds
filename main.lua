@@ -19,6 +19,10 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("CVAR_UPDATE")
 f:RegisterEvent("PLAYER_LOGOUT")
+f:RegisterEvent("CHAT_MSG_PING")
+
+local reportLoadingFinished = false
+local isLoadingFinished = false
 
 f:SetScript("OnEvent", function(self, event, ...)
   if event == "PLAYER_ENTERING_WORLD" then
@@ -36,6 +40,11 @@ f:SetScript("OnEvent", function(self, event, ...)
   elseif event == "PLAYER_LOGOUT" then
     if addon.db.enabled then
       SetCVar("Sound_EnableSFX", 0)
+    end
+  elseif event == "CHAT_MSG_PING" then
+    if addon.db.enabled and not isLoadingFinished then
+      addon:AddonPrint("Ping sounds will play after the loading process has finished.")
+      reportLoadingFinished = true
     end
   end
 end)
@@ -93,6 +102,9 @@ function addon:SetMuteStatus(mute)
     local elapsed = round(GetTime() - start, 2)
     if mute then SetCVar("Sound_EnableSFX", 1) end
     f:RegisterEvent("CVAR_UPDATE")
-    -- addon:AddonPrint("Setup done after "..elapsed.."s")
+    if reportLoadingFinished then
+      addon:AddonPrint("Loading finished after "..elapsed.."s")
+    end
+    isLoadingFinished = true
   end, "Mute")
 end
