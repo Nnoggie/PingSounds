@@ -6,13 +6,27 @@ local slashPrefixes = {
 
 local slashArguments = {
   enable = function()
-    print('enable')
+    if addon.db.enabled then
+      addon:AddonPrint('already enabled')
+      return
+    end
+    addon.db.enabled = true
+    addon:AddonPrint('enabled')
+    addon:SetMuteStatus(true)
   end,
   disable = function()
-    print('disable')
+    if not addon.db.enabled then
+      addon:AddonPrint('already disabled')
+      return
+    end
+    addon.db.enabled = false
+    addon:AddonPrint('disabled')
+    addon:SetMuteStatus(false)
   end,
   toggle = function()
-    print('toggle')
+    addon.db.enabled = not addon.db.enabled
+    addon:AddonPrint(addon.db.enabled and 'enabled' or 'disabled')
+    addon:SetMuteStatus(addon.db.enabled)
   end,
 }
 
