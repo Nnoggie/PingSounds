@@ -41,6 +41,15 @@ f:SetScript("OnEvent", function(self, event, ...)
     if addon.db.enabled then
       SetCVar("Sound_EnableSFX", 0)
     end
+    for i = 1, GetNumAddOns() do
+      local name = GetAddOnInfo(i)
+      if name == addonName then
+        local enabled = GetAddOnEnableState(nil, i)
+        if enabled == 0 then
+          addon.db.installed = false
+        end
+      end
+    end
   elseif event == "CHAT_MSG_PING" then
     if addon.db.enabled and not isLoadingFinished then
       addon:AddonPrint("Ping sounds will play after the loading process has finished.")
