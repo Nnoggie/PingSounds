@@ -1,5 +1,5 @@
 ## Interface: 100107
-## Title: UIManager
+## Title: PingSounds
 ## Author: Nnoggie
 ## Version: 1.0.0
 ## DefaultState: Enabled
