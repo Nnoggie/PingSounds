@@ -1,0 +1,7 @@
+manual-changelog: CHANGELOG.txt
+ignore:
+  - README.md
+enable-nolib-creation: no
+externals:
+  libs/LibStub: https://repos.curseforge.com/wow/libstub/trunk
+  libs/LibAsync: https://github.com/Nnoggie/LibAsync
