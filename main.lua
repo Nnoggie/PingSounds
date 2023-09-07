@@ -74,6 +74,7 @@ local pingSounds = {
 function addon:SetMuteStatus(mute)
   f:UnregisterEvent("CVAR_UPDATE")
   SetCVar("Sound_EnableSFX", 0)
+  addon.db.installed = false
   local setMuteStatusAllAsync = function()
     for i = 1, 6000000 do
       if mute then
