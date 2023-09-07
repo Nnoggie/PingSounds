@@ -1,7 +1,7 @@
 local addonName, addon = ...
 local asyncConfig = {
   type = "everyFrame",
-  maxTime = 16,
+  maxTime = 8,
   maxTimeCombat = 8,
   errorHandler = geterrorhandler()
 }
