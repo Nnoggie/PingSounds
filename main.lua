@@ -27,7 +27,7 @@ local isLoadingFinished = false
 f:SetScript("OnEvent", function(self, event, ...)
   if event == "PLAYER_ENTERING_WORLD" then
     local isInitialLogin, isReload = ...
-    if isInitialLogin then
+    if isInitialLogin or not addon.db.installed then
       addon:Login()
     end
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
@@ -106,5 +106,6 @@ function addon:SetMuteStatus(mute)
       addon:AddonPrint("Loading finished after "..elapsed.."s")
     end
     isLoadingFinished = true
+    addon.db.installed = true
   end, "Mute")
 end
