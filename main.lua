@@ -63,7 +63,8 @@ local pingSounds = {
 }
 
 function addon:SetMuteStatus(mute)
-  SetCVar("Sound_EnableSFX", mute and 1 or 0)
+  f:UnregisterEvent("CVAR_UPDATE")
+  SetCVar("Sound_EnableSFX", 0)
   local setMuteStatusAllAsync = function()
     for i = 1, 6000000 do
       if mute then
@@ -90,6 +91,8 @@ function addon:SetMuteStatus(mute)
     setMuteStatusAllAsync()
     setMuteStatusForSounds(pingSounds)
     local elapsed = round(GetTime() - start, 2)
+    if mute then SetCVar("Sound_EnableSFX", 1) end
+    f:RegisterEvent("CVAR_UPDATE")
     -- addon:AddonPrint("Setup done after "..elapsed.."s")
   end, "Mute")
 end
