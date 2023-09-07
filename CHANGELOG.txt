@@ -1,2 +1,7 @@
+- v1.0.2
+  - various login / reload / logout fixes
+  - notify user when trying to ping during loading process
+  - disable sound effects during loading process
+  - disable sound effects on logout when enabled
 - v1.0.0
   - initial release
