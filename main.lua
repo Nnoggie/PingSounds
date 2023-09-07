@@ -28,8 +28,10 @@ f:SetScript("OnEvent", function(self, event, ...)
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
   elseif event == "CVAR_UPDATE" then
     local cvar, value = ...
-    if cvar == "Sound_EnableSFX" then
-      addon:AddonPrint("To Restore normal sounds, use /pingsounds disable and relog")
+    if cvar == "Sound_EnableSFX" and addon.db.enabled then
+      addon:AddonPrint(
+        "To Restore normal sound effect behavior, use /pingsounds disable and relog or disable the AddOn completely")
+    end
     end
   end
 end)
