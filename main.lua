@@ -34,6 +34,8 @@ f:SetScript("OnEvent", function(self, event, ...)
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
     if not runOnce then
       addon:AddLSMSounds()
+      addon:AddAddonSounds()
+      addon:HookPlaySoundFile()
       runOnce = true
     end
   elseif event == "CVAR_UPDATE" then

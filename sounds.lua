@@ -51,3 +51,24 @@ function addon:AddLSMSounds()
     end
   end
 end
+
+function addon:AddAddonSounds()
+  for _, sound in pairs(addon.db.addonSounds) do
+    table.insert(addon.sounds, sound)
+  end
+end
+
+--- Detect if an AddOn plays a blizzard soundfile through the 'Master' channel and unmute it
+--- Furthermore add it to the addonSounds table to prevent it from being muted again
+--- The sound won't instantly play, but it will play the next time it is triggered
+function addon:HookPlaySoundFile()
+  hooksecurefunc('PlaySoundFile', function(sound, channel)
+    if channel ~= 'MASTER' then return end
+    local fileId = tonumber(sound)
+    if not fileId then return end
+    if addon.sounds[sound] or addon.db.addonSounds[sound] then return end
+    ---@diagnostic disable-next-line: redundant-parameter
+    UnmuteSoundFile(fileId)
+    tinsert(addon.db.addonSounds, fileId)
+  end)
+end

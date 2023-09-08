@@ -2,10 +2,17 @@ local addonName, addon = ...;
 
 local dbDefaults = {
   enabled = true,
+  addonSounds = {},
 };
 
 local function setUpDB()
   PingSoundsDB = PingSoundsDB or CopyTable(dbDefaults);
+  for k, v in pairs(dbDefaults) do
+    -- migrate
+    if (not PingSoundsDB[k]) and (type(PingSoundsDB[k]) ~= "boolean") then
+      PingSoundsDB[k] = v;
+    end
+  end
   addon.db = PingSoundsDB
 end
 
