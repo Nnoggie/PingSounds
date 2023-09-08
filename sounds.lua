@@ -39,19 +39,6 @@ addon.sounds = {
 
 }
 
-function addon:AddLSMSounds()
-  local LSM = LibStub("LibSharedMedia-3.0")
-  if not LSM then return end
-  if not LSM.MediaTable then return end
-  if not LSM.MediaTable.sound then return end
-  for _, sound in pairs(LSM.MediaTable.sound) do
-    local fileId = tonumber(sound)
-    if fileId then
-      table.insert(addon.sounds, fileId)
-    end
-  end
-end
-
 function addon:AddAddonSounds()
   for sound, _ in pairs(addon.db.addonSounds) do
     table.insert(addon.sounds, sound)

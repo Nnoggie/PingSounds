@@ -36,7 +36,6 @@ f:SetScript("OnEvent", function(self, event, ...)
     end
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
     if not runOnce then
-      addon:AddLSMSounds()
       addon:AddAddonSounds()
       addon:HookPlaySoundFile()
       runOnce = true
