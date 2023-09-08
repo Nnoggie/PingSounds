@@ -23,6 +23,7 @@ f:RegisterEvent("CHAT_MSG_PING")
 
 local reportLoadingFinished = false
 local isLoadingFinished = false
+local runOnce
 
 f:SetScript("OnEvent", function(self, event, ...)
   if event == "PLAYER_ENTERING_WORLD" then
@@ -31,6 +32,10 @@ f:SetScript("OnEvent", function(self, event, ...)
       addon:Login()
     end
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
+    if not runOnce then
+      addon:AddLSMSounds()
+      runOnce = true
+    end
   elseif event == "CVAR_UPDATE" then
     local cvar, value = ...
     if cvar == "Sound_EnableSFX" and addon.db.enabled then
@@ -70,16 +75,6 @@ local function round(number, decimals)
   return tonumber((("%%.%df"):format(decimals)):format(number))
 end
 
-local pingSounds = {
-  5339002, -- standard ping
-  --5339004, -- standard hostile variation, unused
-  5340601, -- standard hostile
-  5339006, -- assist
-  5350036, -- attack
-  5342387,
-  5340605,
-}
-
 function addon:SetMuteStatus(mute)
   f:UnregisterEvent("CVAR_UPDATE")
   SetCVar("Sound_EnableSFX", 0)
@@ -108,7 +103,7 @@ function addon:SetMuteStatus(mute)
   addon:Async(function()
     local start = GetTime()
     setMuteStatusAllAsync()
-    setMuteStatusForSounds(pingSounds)
+    setMuteStatusForSounds(addon.sounds)
     local elapsed = round(GetTime() - start, 2)
     if mute then SetCVar("Sound_EnableSFX", 1) end
     f:RegisterEvent("CVAR_UPDATE")
