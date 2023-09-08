@@ -24,5 +24,4 @@ function addon:AddLSMSounds()
       table.insert(addon.sounds, fileId)
     end
   end
-  vdt(addon.sounds)
 end
