@@ -53,7 +53,7 @@ function addon:AddLSMSounds()
 end
 
 function addon:AddAddonSounds()
-  for _, sound in pairs(addon.db.addonSounds) do
+  for sound, _ in pairs(addon.db.addonSounds) do
     table.insert(addon.sounds, sound)
   end
 end
@@ -63,12 +63,13 @@ end
 --- The sound won't instantly play, but it will play the next time it is triggered
 function addon:HookPlaySoundFile()
   hooksecurefunc('PlaySoundFile', function(sound, channel)
-    if channel ~= 'MASTER' then return end
+    if channel ~= 'Master' then return end
     local fileId = tonumber(sound)
     if not fileId then return end
     if addon.sounds[sound] or addon.db.addonSounds[sound] then return end
     ---@diagnostic disable-next-line: redundant-parameter
     UnmuteSoundFile(fileId)
-    tinsert(addon.db.addonSounds, fileId)
+    addon.db.addonSounds[fileId] = true
+    addon:AddonPrint('Soundfile '..fileId..' was played by an AddOn and will be unmuted on next play.')
   end)
 end
