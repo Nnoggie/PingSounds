@@ -30,6 +30,8 @@ f:SetScript("OnEvent", function(self, event, ...)
     local isInitialLogin, isReload = ...
     if isInitialLogin or not addon.db.installed then
       addon:Login()
+    else
+      isLoadingFinished = true
     end
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
     if not runOnce then
