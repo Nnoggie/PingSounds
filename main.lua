@@ -93,7 +93,7 @@ function addon:SetMuteStatus(mute)
     end
   end
 
-  local setMuteStatusForSounds = function(sounds)
+  local unMuteSounds = function(sounds)
     for _, id in pairs(sounds) do
       ---@diagnostic disable-next-line: redundant-parameter
       UnmuteSoundFile(id)
@@ -103,7 +103,7 @@ function addon:SetMuteStatus(mute)
   addon:Async(function()
     local start = GetTime()
     setMuteStatusAllAsync()
-    setMuteStatusForSounds(addon.sounds)
+    unMuteSounds(addon.sounds)
     local elapsed = round(GetTime() - start, 2)
     if mute then SetCVar("Sound_EnableSFX", 1) end
     f:RegisterEvent("CVAR_UPDATE")
