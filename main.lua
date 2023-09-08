@@ -17,7 +17,6 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:RegisterEvent("CVAR_UPDATE")
 f:RegisterEvent("PLAYER_LOGOUT")
 f:RegisterEvent("CHAT_MSG_PING")
 
@@ -38,6 +37,7 @@ f:SetScript("OnEvent", function(self, event, ...)
     if not runOnce then
       addon:AddAddonSounds()
       addon:HookPlaySoundFile()
+      f:RegisterEvent("CVAR_UPDATE")
       runOnce = true
     end
   elseif event == "CVAR_UPDATE" then
