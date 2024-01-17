@@ -30,7 +30,13 @@ f:SetScript("OnEvent", function(self, event, ...)
     if isInitialLogin or not addon.db.installed then
       addon:Login()
     else
-      if addon.db.enabled then SetCVar("Sound_EnableSFX", 1) end
+      if addon.db.enabled then
+        --environmental sounds play instantly after login
+        --TODO: test
+        C_Timer.After(10, function()
+          SetCVar("Sound_EnableSFX", 1)
+        end)
+      end
       isLoadingFinished = true
     end
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")

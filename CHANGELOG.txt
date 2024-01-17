@@ -1,3 +1,5 @@
+- v1.2.0
+  - Patch 10.2.5 update
 - v1.0.3
   - detect if an AddOn is trying to play a blizzard sound and unmute that sound
   - bugfix: enable sfx channel on reload
