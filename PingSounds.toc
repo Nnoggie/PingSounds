@@ -1,7 +1,7 @@
-## Interface: 100205
+## Interface: 110002
 ## Title: PingSounds
 ## Author: Nnoggie
-## Version: 1.2.0
+## Version: 1.3.0
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariables: PingSoundsDB
