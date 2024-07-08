@@ -27,6 +27,9 @@ local runOnce
 f:SetScript("OnEvent", function(self, event, ...)
   if event == "PLAYER_ENTERING_WORLD" then
     local isInitialLogin, isReload = ...
+    if not addon.db.installed then
+      addon:CheckSoundChannelVolumes()
+    end
     if isInitialLogin or not addon.db.installed then
       addon:Login()
     else
@@ -123,4 +126,24 @@ function addon:SetMuteStatus(mute)
     isLoadingFinished = true
     addon.db.installed = true
   end, "Mute")
+end
+
+function addon:CheckSoundChannelVolumes()
+  local soundChannels = {
+    {
+      name = "Sound_MasterVolume",
+      volume = 0.25,
+    },
+    {
+      name = "Sound_SFXVolume",
+      volume = 1,
+    }
+  }
+  for _, channel in pairs(soundChannels) do
+    local volume = C_CVar.GetCVarInfo(channel.name)
+    if volume == "0" then
+      C_CVar.SetCVar(channel.name, channel.volume)
+      addon:AddonPrint("Restored "..channel.name.." to "..channel.volume)
+    end
+  end
 end
