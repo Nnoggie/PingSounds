@@ -59,10 +59,10 @@ f:SetScript("OnEvent", function(self, event, ...)
     if addon.db.enabled then
       SetCVar("Sound_EnableSFX", 0)
     end
-    for i = 1, GetNumAddOns() do
-      local name = GetAddOnInfo(i)
+    for i = 1, C_AddOns.GetNumAddOns() do
+      local name = C_AddOns.GetAddOnInfo(i)
       if name == addonName then
-        local enabled = GetAddOnEnableState(nil, i)
+        local enabled = C_AddOns.GetAddOnEnableState(i)
         if enabled == 0 then
           addon.db.installed = false
         end
