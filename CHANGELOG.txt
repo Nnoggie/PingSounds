@@ -1,2 +1,4 @@
-- v1.3.0
+## v1.3.1 (2024-07-24)
+  - mute ambience sounds
+## v1.3.0 (2024-07-24)
   - War Within Update
