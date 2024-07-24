@@ -33,13 +33,6 @@ f:SetScript("OnEvent", function(self, event, ...)
     if isInitialLogin or not addon.db.installed then
       addon:Login()
     else
-      if addon.db.enabled then
-        --environmental sounds play instantly after login
-        --TODO: test
-        C_Timer.After(10, function()
-          C_CVar.SetCVar("Sound_EnableSFX", 1)
-        end)
-      end
       isLoadingFinished = true
     end
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
@@ -58,6 +51,7 @@ f:SetScript("OnEvent", function(self, event, ...)
   elseif event == "PLAYER_LOGOUT" then
     if addon.db.enabled then
       C_CVar.SetCVar("Sound_EnableSFX", 0)
+      C_CVar.SetCVar("Sound_EnableAmbience", 0)
     end
     for i = 1, C_AddOns.GetNumAddOns() do
       local name = C_AddOns.GetAddOnInfo(i)
@@ -91,6 +85,7 @@ end
 function addon:SetMuteStatus(mute)
   f:UnregisterEvent("CVAR_UPDATE")
   C_CVar.SetCVar("Sound_EnableSFX", 0)
+  C_CVar.SetCVar("Sound_EnableAmbience", 0)
   addon.db.installed = false
   local setMuteStatusAllAsync = function()
     for i = 1, 6000000 do
@@ -118,7 +113,10 @@ function addon:SetMuteStatus(mute)
     setMuteStatusAllAsync()
     unMuteSounds(addon.sounds)
     local elapsed = round(GetTime() - start, 2)
-    if mute then C_CVar.SetCVar("Sound_EnableSFX", 1) end
+    if mute then
+      C_CVar.SetCVar("Sound_EnableSFX", 1)
+      C_CVar.SetCVar("Sound_EnableAmbience", 1)
+    end
     f:RegisterEvent("CVAR_UPDATE")
     if reportLoadingFinished then
       addon:AddonPrint("Loading finished after "..elapsed.."s")
