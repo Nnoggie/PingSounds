@@ -1,4 +1,2 @@
-## v1.3.1 (2024-07-24)
-  - mute ambience sounds
-## v1.3.0 (2024-07-24)
-  - War Within Update
+## v1.3.2 (2024-09-16)
+  - vastly increase the number of sound ids being muted catching dwarven footsteps and other random sounds
