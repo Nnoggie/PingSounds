@@ -88,7 +88,7 @@ function addon:SetMuteStatus(mute)
   C_CVar.SetCVar("Sound_EnableAmbience", 0)
   addon.db.installed = false
   local setMuteStatusAllAsync = function()
-    for i = 1, 6000000 do
+    for i = 1, 9999999 do
       if mute then
         MuteSoundFile(i)
       else
