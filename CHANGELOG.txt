@@ -1,2 +1,2 @@
-## v1.3.2 (2024-09-16)
-  - vastly increase the number of sound ids being muted catching dwarven footsteps and other random sounds
+## 1.3.3 (2024-10-03)
+  - Make sure the sound effects channel stays enabled after reloading
