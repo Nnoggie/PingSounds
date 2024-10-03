@@ -33,6 +33,7 @@ f:SetScript("OnEvent", function(self, event, ...)
     if isInitialLogin or not addon.db.installed then
       addon:Login()
     else
+      C_CVar.SetCVar("Sound_EnableSFX", 1)
       isLoadingFinished = true
     end
     f:UnregisterEvent("PLAYER_ENTERING_WORLD")
