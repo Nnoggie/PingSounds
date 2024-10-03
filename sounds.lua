@@ -1,4 +1,5 @@
-local addonName, addon = ...
+---@class PingSounds
+local addon = select(2, ...)
 
 addon.sounds = {
   ---------------

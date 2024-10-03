@@ -1,4 +1,7 @@
-local addonName, addon = ...;
+---@type string
+local addonName = ...
+---@class PingSounds
+local addon = select(2, ...)
 
 local dbDefaults = {
   enabled = true,
